@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video_chat</title>
+</head>
+<body>
+    <h3 id="label-username">USERNAME</h3>
+    <div>
+        <input id='username'><button id="btn-join">JOIN ROOM</button>
+    </div>
+
+    <div class="main-grid-container">
+        <div id="video-container">
+            <div><video id="local-video " style="float: left;">autoplay</video></div>
+            <button id="btn-toggle-audio">AUDIO MUTE</button>
+            <button id="btn-toggle-video">VIDEO OFF</button>
+
+        </div>
+
+        <div id="chat">
+            <h3>CHAT</h3>
+            <div id="message">
+                <ul id="message-list"></ul>
+            </div>
+
+            <div><input id="msg"><button id="send-send-msg">SEND MESSAGE</button></div>
+            <button id="btn-share-screen">SHARE SCREEN</button>
+        </div>
+
+    </div>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
