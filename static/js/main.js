@@ -7,13 +7,13 @@ var btnJoin = document.querySelector('#btn-join');
 
 var username;
 
-var webSocket
+var webSocket;
 
 function webSocketOnMessage(event){
-    var parseData = JSON.parse(event.data);
-    var message = parseData['message'];
+    var parsedData = JSON.parse(event.data);
+    var message = parsedData['message'];
 
-    console.log('message:', message)
+    console.log('message:', message);
 
 
 }
@@ -56,9 +56,15 @@ btnJoin.addEventListener('click', () => {
     webSocket.addEventListener('open', (e) => {
 
         console.log('CONNECTION OPENED!!!');
-        }
 
-    );
+        var jsonStr = JSON.stringify({
+            'message:': 'THIS IS MESSAGE',
+        });
+
+        webSocket.send(jsonStr);
+
+    });
+
     webSocket.addEventListener('message', webSocketOnMessage);
     webSocket.addEventListener('close', (e) => {
 
@@ -71,3 +77,23 @@ btnJoin.addEventListener('click', () => {
 
 
 });
+
+var localStream = new MediaStream();
+
+const constrains = {
+    "video": true,
+    "audio": true
+
+};
+
+const localVideo = document.querySelector('#local-video');
+
+var userMedia = navigator.mediaDevices.getUserMedia(constrains)
+    .then(stream => {
+        localStream = stream;
+        localVideo.srcObject = localStream;
+        localVideo.mated = true;
+    })
+    .catch(error => {
+        console.log('ERROR: MEDIA DEVICES', error)
+    })
